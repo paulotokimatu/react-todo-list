@@ -1,17 +1,33 @@
 /* global document */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { render } from 'react-dom';
 
 import '../styles.scss';
 
-export default class Hello extends Component {
+import Cockpit from './components/cockpit';
+import Tasks from './components/tasks';
+
+export default class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      tasks: [
+        { title: 'Foobar', completed: false, date: new Date() },
+        { title: 'Lorem', completed: true, date: new Date() },
+        { title: 'BobAlice', completed: false, date: new Date() },
+      ]
+    };
+  }
+
   render() {
     return (
       <div>
-        Hello from react
+        <Cockpit />
+        <Tasks tasks={this.state.tasks} />
       </div>
     );
   }
 }
 
-render(<Hello />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
