@@ -13,7 +13,7 @@ class App extends PureComponent {
     return (
       <div>
         <Cockpit addTask={this.props.onAddTask} />
-        <Tasks tasks={this.props.tasks} />
+        <Tasks tasks={this.props.tasks} removeTask={this.props.onRemoveTask} toggleTask={this.props.onToggleTask}/>
       </div>
     );
   }
@@ -21,14 +21,28 @@ class App extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-      tasks: state.tasks
+    tasks: state.tasks
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-      onAddTask: () => dispatch({type: actionTypes.ADD_TASK}),
-      onRemovedPerson: (id) => dispatch({type: actionTypes.REMOVE_TASK})
+    onAddTask: (title, completed, currentDate) => dispatch({
+      type: actionTypes.ADD_TASK,
+      payload: {
+        title: title,
+        completed: completed,
+        date: currentDate
+      }
+    }),
+    onRemoveTask: (index) => dispatch({
+      type: actionTypes.REMOVE_TASK,
+      payload: {index: index}
+    }),
+    onToggleTask: (index) => dispatch({
+      type: actionTypes.TOGGLE_TASK,
+      payload: {index: index}
+    })
   }
 };
 

@@ -12,32 +12,34 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_TASK:
       const newTask = {
-        title: 'Blabla',
-        completed: false,
-        date: new Date()
+        title: action.payload.title,
+        completed: action.payload.completed,
+        date: action.payload.date
       }
-
-      console.log('aaa', newTask);
 
       return {
         ...state,
         tasks: state.tasks.concat(newTask)
       }
+
     case actionTypes.REMOVE_TASK:
+      //arrumar
       return {
         ...state,
-        tasks: state.tasks.filter(person => person.id !== action.taskId)
+        tasks: state.tasks.filter((person, i) => i !== action.payload.index)
       }
-    case actionTypes.TOGGLE_TASK:
-    //arrumar
-      const copyTasks = {...state.tasks};
-      const updatedTask = {...copyTasks[taskIndex]};
 
-      updatedTask.completed != !updatedTask.completed;
+    case actionTypes.TOGGLE_TASK:
+      // Improve
+      const copyTasks = [...state.tasks];
+      const updatedTask = {...copyTasks[action.payload.index]};
+
+      updatedTask.completed = !updatedTask.completed;
+      copyTasks[action.payload.index] = updatedTask;
 
       return {
         ...state,
-        tasks: updatedTasks
+        tasks: copyTasks
       }
   }
   return state;

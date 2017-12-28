@@ -2,7 +2,9 @@ import React from 'react';
 
 const task = (props) => {
   return (
-    One task
+    <div>
+      {props.task.title} / {props.task.date.getDate()} / {String(props.task.completed)}
+    </div>
   );
 };
 
