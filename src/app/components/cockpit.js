@@ -11,10 +11,8 @@ export default class Cockpit extends Component {
 
   inputTaskChanged = (e) => {
     if (e.target.value !== '' && e.key === 'Enter') {
-      this.setState({inputTask: e.target.value});
+      this.props.addTask();
       e.target.value = '';
-
-      return;
     }
   }
 
