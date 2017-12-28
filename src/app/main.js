@@ -16,7 +16,7 @@ export default class App extends PureComponent {
         { title: 'Foobar', completed: false, date: new Date() },
         { title: 'Lorem', completed: true, date: new Date() },
         { title: 'BobAlice', completed: false, date: new Date() },
-      ]
+      ],
     };
   }
 
