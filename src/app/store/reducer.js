@@ -41,6 +41,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         tasks: copyTasks
       }
+    
+    //TODO
+    case actionTypes.SORT_TASKS:
+      return state.slice().sort(function(a, b) {
+        var nameA = a.name.toLowerCase(),
+          nameB = b.name.toLowerCase()
+        if (nameA < nameB)
+          return -1
+        if (nameA > nameB)
+          return 1
+        return 0
+      })
   }
   return state;
 };
